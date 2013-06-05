@@ -1,17 +1,13 @@
-import Base.start
-import Base.next
-import Base.length
-
 type NDenumerate{A<:Array}
     arr::A
 end
 
 ndenumerate(arr) = NDenumerate(arr)
 
-length(nde::NDenumerate) = length(nde.arr)
-start(nde::NDenumerate) = ones(Int,length(size(nde.arr)))
+Base.length(nde::NDenumerate) = Base.length(nde.arr)
+Base.start(nde::NDenumerate) = ones(Int,length(size(nde.arr)))
 
-function next(nde::NDenumerate,state::Array{Int})
+function Base.next(nde::NDenumerate,state::Array{Int})
     println(state)
     shape = size(nde.arr)
     dims = length(shape)

@@ -1,10 +1,3 @@
-# One dimensional index => two dimensional index
-function ravel_index(index,shape)
-    xind = index % shape[1]
-    yind = ((index - xind) / shape[1]) + 1
-    return (int(xind), int(yind))
-end
-
 # Given a multidimensional index, return the indices of it neighbors
 function get_neighbors(index,shape)
     i,j = index
@@ -28,7 +21,7 @@ function lifestep(board)
     newboard = copy(board)
 
     for (index_1d,cell) in enumerate(board)
-        index_2ds = get_neighbors(ravel_index(index_1d,shape),shape)
+        index_2ds = get_neighbors(ind2sub(shape,index_1d),shape)
         num_neighbors = sum(map(idx -> board[idx...], index_2ds))        
 
         # there are only two real cases
